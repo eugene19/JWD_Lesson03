@@ -1,2 +1,2 @@
 # JWD_Lesson03
-Epam course 'Java Web Development'
+Home work for lesson 3 of Epam course 'Java Web Development'.

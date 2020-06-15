@@ -8,7 +8,7 @@ public class OneDimensionArrayHelper {
 
     public static void main(String[] args) {
 
-        double[] doubleNums = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
+        double[] doubleNums = {-14, -3, 2, -1, 0, 1, 2, 3};
         int[] integerNums = {1, 2, 3, 0, 1, 3, 3};
 
         // Task 1
@@ -36,15 +36,16 @@ public class OneDimensionArrayHelper {
         } else if (nums.length == 1) {
             return nums[0];
         } else {
-            double maxSum = nums[0] + nums[1];
+            double maxSum = nums[0] + nums[nums.length - 1];
             double currentSum;
 
-            for (int i = 1; i < nums.length; i++) {
-                currentSum = nums[i - 1] + nums[i];
+            for (int i = 0; i < nums.length / 2; i++) {
+                currentSum = nums[i] + nums[nums.length - 1 - i];
                 if (currentSum > maxSum) {
                     maxSum = currentSum;
                 }
             }
+
             return maxSum;
         }
     }

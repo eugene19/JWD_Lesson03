@@ -10,16 +10,19 @@ public class OneDimensionArrayHelper {
 
         double[] doubleNums = {-14, -3, 2, -1, 0, 1, 2, 3};
         int[] integerNums = {1, 2, 3, 0, 1, 3, 3};
+        int[] initPassword = {0, 0, 0, 0, 0, 0, 0, 0, 1, 5};
 
         // Task 1
-        System.out.printf("Max sum near nums: %.2f.%n", maxSumNextNums(doubleNums));
+        System.out.printf("Max sum near nums: %.2f.%n",
+                maxSumNextNums(doubleNums));
 
         // Task 2
         System.out.printf("Array without min number: %s.%n",
                 Arrays.toString(deleteMinNum(integerNums)));
 
         // Task 3
-
+        System.out.printf("Password: %s.%n",
+                Arrays.toString(getPassword(initPassword)));
 
         // Task 4
         System.out.printf("Most common number is: %.2f.%n",
@@ -163,5 +166,40 @@ public class OneDimensionArrayHelper {
         }
 
         return minOdd;
+    }
+
+    public static int[] getPassword(int[] array) {
+        int[] password = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int indexFirstCube = 0;
+        int indexSecondCube = 0;
+
+        // find initial cubes
+        for (int i = 0; i < array.length; i++) {
+            indexFirstCube = array[indexFirstCube] > 0 ? indexFirstCube : i;
+            indexSecondCube = array[indexFirstCube] > 0 && array[i] > 0 ? i : indexSecondCube;
+        }
+
+        // find sequence of 3 cubes
+        int pos2 = (indexSecondCube - indexFirstCube) % 3 > 1 ? 2 : 1;
+        int pos3 = (indexSecondCube - indexFirstCube) % 3 > 1 ? 1 : 2;
+        int[] d = new int[3];
+        d[indexFirstCube % 3] = array[indexFirstCube];
+        d[(indexFirstCube + pos2) % 3] = array[indexSecondCube];
+        d[(indexFirstCube + pos3) % 3] = 10 - array[indexFirstCube] - d[(indexFirstCube + pos2) % 3];
+
+
+        // fill password and check is valid
+        for (int i = 0; i < password.length; i++) {
+            if (d[i % 3] < 1 || d[i % 3] > 6) {
+                throw new IllegalArgumentException("Password never passed");
+            }
+            password[i] = d[i % 3];
+        }
+
+        if (password[indexFirstCube] != array[indexFirstCube] || password[indexSecondCube] != array[indexSecondCube]) {
+            return null;
+        } else {
+            return password;
+        }
     }
 }

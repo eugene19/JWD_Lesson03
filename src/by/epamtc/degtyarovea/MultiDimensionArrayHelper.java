@@ -6,6 +6,7 @@ public class MultiDimensionArrayHelper {
 
     public static void main(String[] args) {
         int size = 4;
+        int[] array = {1, 2, 3, 4};
 
         // Task 1
         System.out.printf("1. Square array with size %d.%n%s%n",
@@ -21,6 +22,11 @@ public class MultiDimensionArrayHelper {
         System.out.printf("3. Square array with 1 and 0 with size %d.%n%s%n",
                 size,
                 parseArrayToString(createSquareArrayWithOneZero(size)));
+
+        // Task 4
+        System.out.printf("4. Square array with pow numbers with size %d.%n%s%n",
+                size,
+                parseArrayToString(createSquareArrayWithPowNumbers(array)));
     }
 
     public static int[][] createSquareArray(int size) {
@@ -54,6 +60,20 @@ public class MultiDimensionArrayHelper {
 
         for (int[] ints : array) {
             builder.append(Arrays.toString(ints))
+                    .append("\n");
+        }
+
+        return builder.toString();
+    }
+
+    private static String parseArrayToString(double[][] array) {
+        if (array == null) {
+            return null;
+        }
+        StringBuilder builder = new StringBuilder();
+
+        for (double[] doubles : array) {
+            builder.append(Arrays.toString(doubles))
                     .append("\n");
         }
 
@@ -96,4 +116,17 @@ public class MultiDimensionArrayHelper {
         return array;
     }
 
+    public static double[][] createSquareArrayWithPowNumbers(int[] array) {
+        double[][] square = new double[array.length][array.length];
+        int powNum = 1;
+
+        for (int i = 0; i < square.length; i++) {
+            for (int j = 0; j < square[i].length; j++) {
+                square[i][j] = Math.pow(array[j], powNum);
+            }
+            powNum++;
+        }
+
+        return square;
+    }
 }

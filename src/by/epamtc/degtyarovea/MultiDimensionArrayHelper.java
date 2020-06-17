@@ -5,14 +5,22 @@ import java.util.Arrays;
 public class MultiDimensionArrayHelper {
 
     public static void main(String[] args) {
+        int size = 4;
 
         // Task 1
-        int size = 5;
         System.out.printf("1. Square array with size %d.%n%s%n",
                 size,
                 parseArrayToString(createSquareArray(size)));
 
         // Task 2
+        System.out.printf("2. Square array with input diagonal with size %d.%n%s%n",
+                size,
+                parseArrayToString(createSquareArrayWithDiagonals(size)));
+
+        // Task 3
+        System.out.printf("3. Square array with 1 and 0 with size %d.%n%s%n",
+                size,
+                parseArrayToString(createSquareArrayWithOneZero(size)));
     }
 
     public static int[][] createSquareArray(int size) {
@@ -50,6 +58,42 @@ public class MultiDimensionArrayHelper {
         }
 
         return builder.toString();
+    }
+
+    public static int[][] createSquareArrayWithDiagonals(int size) {
+        if (size <= 0) {
+            return null;
+        }
+        int[][] array = new int[size][size];
+
+        for (int i = 0; i < array.length; i++) {
+            array[i][i] = (i + 1) * (i + 2);
+        }
+
+        return array;
+    }
+
+    public static int[][] createSquareArrayWithOneZero(int size) {
+        if (size <= 0) {
+            return null;
+        }
+        int[][] array = new int[size][size];
+        int till = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = (j < till ^ (array[i].length - 1 - j >= till)) ? 1 : 0;
+            }
+
+            if (i < array.length / 2 - 1) {
+                till++;
+            }
+            if (i > array.length / 2 - 1) {
+                till--;
+            }
+        }
+
+        return array;
     }
 
 }

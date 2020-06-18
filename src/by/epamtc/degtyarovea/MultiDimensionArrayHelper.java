@@ -27,6 +27,13 @@ public class MultiDimensionArrayHelper {
         System.out.printf("4. Square array with pow numbers with size %d.%n%s%n",
                 size,
                 parseArrayToString(createSquareArrayWithPowNumbers(array)));
+
+        // Task 5
+        int[][] leftMatrix = {{1, -1}, {2, 0}, {3, 0}};
+        int[][] rightMatrix = {{1, 1}, {2, 0}};
+
+        System.out.printf("5. Multiplication of matrix is: %n%s%n",
+                parseArrayToString(multiplyMatrix(leftMatrix, rightMatrix)));
     }
 
     public static int[][] createSquareArray(int size) {
@@ -118,15 +125,30 @@ public class MultiDimensionArrayHelper {
 
     public static double[][] createSquareArrayWithPowNumbers(int[] array) {
         double[][] square = new double[array.length][array.length];
-        int powNum = 1;
 
         for (int i = 0; i < square.length; i++) {
             for (int j = 0; j < square[i].length; j++) {
-                square[i][j] = Math.pow(array[j], powNum);
+                square[i][j] = Math.pow(array[j], i + 1);
             }
-            powNum++;
         }
 
         return square;
+    }
+
+    public static int[][] multiplyMatrix(int[][] left, int[][] right) {
+        if (left[0].length != right.length) {
+            return null;
+        }
+        int[][] result = new int[left.length][right[0].length];
+
+        for (int i = 0; i < left.length; i++) {
+            for (int j = 0; j < right[0].length; j++) {
+                for (int k = 0; k < right.length; k++) {
+                    result[i][j] += left[i][k] * right[k][j];
+                }
+            }
+        }
+
+        return result;
     }
 }

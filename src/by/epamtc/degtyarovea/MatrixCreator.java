@@ -168,34 +168,60 @@ public class MatrixCreator {
         int y = size - 1;
         int count = 1;
 
-        while (true) {
+        while (hasZero(matrix)) {
             matrix[(matrix.length - 1) - y][x] = count++;
 
-            if (x == matrix.length - 1) x = -1;
-            if (y >= matrix.length - 1) y = -1;
+            if (x == matrix.length - 1) {
+                x = -1;
+            }
+            if (y >= matrix.length - 1) {
+                y = -1;
+            }
             x++;
             y++;
 
             if (matrix[matrix.length - 1 - y][x] != 0) {
                 y--;
             }
-
-            int count1 = 0;
-            for (int[] ints : matrix) {
-                for (int i : ints) {
-                    if (i == 0) {
-                        count1++;
-                    }
-                }
-            }
-            if (count1 == 0) break;
         }
 
         return matrix;
     }
 
+    private static boolean hasZero(int[][] matrix) {
+        int count = 0;
+        for (int[] ints : matrix) {
+            for (int i : ints) {
+                if (i == 0) {
+                    count++;
+                }
+            }
+        }
+        return count != 0;
+    }
+
     public static int[][] createEvenMagic(int size) {
         int[][] matrix = fillMatrix(size);
+
+        rearrangementMainDiagonal(matrix);
+        rearrangementSecondaryDiagonal(matrix);
+
+        return matrix;
+    }
+
+    private static void rearrangementSecondaryDiagonal(int[][] matrix) {
+        int count = 0;
+
+        for (int i = 0; i < matrix.length / 2; i++) {
+            int temp;
+            temp = matrix[matrix.length - 1 - count][i];
+            matrix[matrix.length - 1 - count][i] = matrix[i][matrix.length - 1 - count];
+            matrix[i][matrix.length - 1 - count] = temp;
+            count++;
+        }
+    }
+
+    private static void rearrangementMainDiagonal(int[][] matrix) {
         int count = 0;
 
         for (int i = 0; i < matrix.length / 2; i++) {
@@ -205,17 +231,6 @@ public class MatrixCreator {
             matrix[matrix.length - 1 - count][matrix.length - 1 - count] = temp;
             count++;
         }
-
-        count = 0;
-        for (int i = 0; i < matrix.length / 2; i++) {
-            int temp;
-            temp = matrix[matrix.length - 1 - count][i];
-            matrix[matrix.length - 1 - count][i] = matrix[i][matrix.length - 1 - count];
-            matrix[i][matrix.length - 1 - count] = temp;
-            count++;
-        }
-
-        return matrix;
     }
 
     private static int[][] fillMatrix(int size) {

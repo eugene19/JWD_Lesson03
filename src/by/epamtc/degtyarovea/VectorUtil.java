@@ -36,21 +36,23 @@ public class VectorUtil {
     public static double maxSumNearbyNums(double[] nums) {
         if (isEmpty(nums)) {
             return 0;
-        } else if (nums.length == 1) {
-            return nums[0];
-        } else {
-            double maxSum = nums[0] + nums[nums.length - 1];
-            double currentSum;
-
-            for (int i = 0; i < nums.length / 2; i++) {
-                currentSum = nums[i] + nums[nums.length - 1 - i];
-                if (currentSum > maxSum) {
-                    maxSum = currentSum;
-                }
-            }
-
-            return maxSum;
         }
+
+        if (nums.length == 1) {
+            return nums[0];
+        }
+
+        double maxSum = nums[0] + nums[nums.length - 1];
+        double currentSum;
+
+        for (int i = 0; i < nums.length / 2; i++) {
+            currentSum = nums[i] + nums[nums.length - 1 - i];
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+            }
+        }
+
+        return maxSum;
     }
 
     private static boolean isEmpty(double[] nums) {
@@ -60,20 +62,21 @@ public class VectorUtil {
     public static int[] deleteMinNums(int[] nums) {
         if (nums == null || nums.length == 0) {
             return nums;
-        } else {
-            int minNum = minNum(nums);
-            int newLength = countWithoutMin(nums, minNum);
-            int[] withoutMin = new int[newLength];
-            int count = 0;
-
-            for (int num : nums) {
-                if (num != minNum) {
-                    withoutMin[count++] = num;
-                }
-            }
-
-            return withoutMin;
         }
+
+        int minNum = minNum(nums);
+        int newLength = countWithoutMin(nums, minNum);
+        int[] withoutMin = new int[newLength];
+        int count = 0;
+
+        for (int num : nums) {
+            if (num != minNum) {
+                withoutMin[count++] = num;
+            }
+        }
+
+        return withoutMin;
+
     }
 
     private static int minNum(int[] nums) {
@@ -119,9 +122,9 @@ public class VectorUtil {
         if (password[indexFirstCube] != array[indexFirstCube]
                 || password[indexSecondCube] != array[indexSecondCube]) {
             return null;
-        } else {
-            return password;
         }
+
+        return password;
     }
 
     private static int[] findSequenceOfThree(int[] array, int indexFirstCube, int indexSecondCube) {

@@ -20,17 +20,17 @@ public class VectorUtil {
 
         // Task 3
         int[] initPassword = {0, 0, 0, 0, 0, 0, 0, 0, 1, 5};
-        int[] fullPassword = getPassword(initPassword);
+        int[] fullPassword = password(initPassword);
         String passwordText = (fullPassword != null) ? Arrays.toString(fullPassword) : "Password not found";
         System.out.printf("Password: %s.%n", passwordText);
 
         // Task 4
         System.out.printf("Most common number is: %.2f.%n",
-                getMostCommonNum(doubleNums));
+                mostCommonNum(doubleNums));
 
         // Task 5
         System.out.printf("Sum of max even and min odd: %.2f.%n",
-                getSumMaxEvenAndMinOdd(doubleNums));
+                sumMaxEvenAndMinOdd(doubleNums));
     }
 
     public static double maxSumNearbyNums(double[] nums) {
@@ -61,8 +61,8 @@ public class VectorUtil {
         if (nums == null || nums.length == 0) {
             return nums;
         } else {
-            int minNum = getMinNum(nums);
-            int newLength = getCountWithoutMin(nums, minNum);
+            int minNum = minNum(nums);
+            int newLength = countWithoutMin(nums, minNum);
             int[] withoutMin = new int[newLength];
             int count = 0;
 
@@ -76,7 +76,7 @@ public class VectorUtil {
         }
     }
 
-    private static int getMinNum(int[] nums) {
+    private static int minNum(int[] nums) {
         int min = nums[0];
 
         for (int num : nums) {
@@ -87,7 +87,7 @@ public class VectorUtil {
         return min;
     }
 
-    private static int getCountWithoutMin(int[] nums, int min) {
+    private static int countWithoutMin(int[] nums, int min) {
         int count = 0;
 
         for (int num : nums) {
@@ -99,7 +99,7 @@ public class VectorUtil {
         return count;
     }
 
-    public static int[] getPassword(int[] array) {
+    public static int[] password(int[] array) {
         int[] password = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int indexFirstCube = 0;
         int indexSecondCube = 0;
@@ -136,8 +136,8 @@ public class VectorUtil {
         return sequence;
     }
 
-    public static double getMostCommonNum(double[] nums) {
-        Map<Double, Integer> numsFrequency = getNumsFrequency(nums);
+    public static double mostCommonNum(double[] nums) {
+        Map<Double, Integer> numsFrequency = numsFrequency(nums);
         double mostCommonNum = 0;
         double maxFrequency = 0;
 
@@ -155,7 +155,7 @@ public class VectorUtil {
         return mostCommonNum;
     }
 
-    private static Map<Double, Integer> getNumsFrequency(double[] nums) {
+    private static Map<Double, Integer> numsFrequency(double[] nums) {
         Map<Double, Integer> numFrequency = new TreeMap<>();
 
         for (double num : nums) {
@@ -171,17 +171,17 @@ public class VectorUtil {
         return numFrequency;
     }
 
-    public static double getSumMaxEvenAndMinOdd(double[] nums) {
+    public static double sumMaxEvenAndMinOdd(double[] nums) {
         if (isEmpty(nums)) {
             return 0;
         }
-        double maxEven = getMaxEven(nums);
-        double minOdd = getMinOdd(nums);
+        double maxEven = maxEven(nums);
+        double minOdd = minOdd(nums);
 
         return maxEven + minOdd;
     }
 
-    private static double getMaxEven(double[] nums) {
+    private static double maxEven(double[] nums) {
         double maxEven = nums[1];
 
         for (int i = 1; i < nums.length; i += 2) {
@@ -193,7 +193,7 @@ public class VectorUtil {
         return maxEven;
     }
 
-    private static double getMinOdd(double[] nums) {
+    private static double minOdd(double[] nums) {
         double minOdd = nums[0];
 
         for (int i = 0; i < nums.length; i += 2) {

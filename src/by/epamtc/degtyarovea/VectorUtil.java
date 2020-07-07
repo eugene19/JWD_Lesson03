@@ -18,7 +18,7 @@ public class VectorUtil {
                 vectorToString(deleteMinNums(integerNums)));
 
         // Task 3
-        int[] initPassword = {1, 5, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] initPassword = {0, 0, 0, 0, 0, 0, 0, 0, 1, 5};
         int[] fullPassword = password(initPassword);
         String passwordText = (fullPassword != null) ? vectorToString(fullPassword) : "Password not found";
         System.out.printf("3. Password: %s.%n", passwordText);
@@ -214,9 +214,9 @@ public class VectorUtil {
         for (int i = 0; i < vector.length; i++) {
             if (i != 0) {
                 builder.append(separator)
-                        .append(i);
+                        .append(vector[i]);
             } else {
-                builder.append(i);
+                builder.append(vector[i]);
             }
         }
 

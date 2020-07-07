@@ -1,6 +1,5 @@
 package by.epamtc.degtyarovea;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,25 +10,25 @@ public class VectorUtil {
         int[] integerNums = {1, 2, 3, 0, 1, 3, 3};
 
         // Task 1
-        System.out.printf("Max sum of nums nearby: %.2f.%n",
+        System.out.printf("1. Max sum of nums nearby: %.2f.%n",
                 maxSumNearbyNums(doubleNums));
 
         // Task 2
-        System.out.printf("Array without min number: %s.%n",
-                Arrays.toString(deleteMinNums(integerNums)));
+        System.out.printf("2. Array without min number: %s.%n",
+                vectorToString(deleteMinNums(integerNums)));
 
         // Task 3
-        int[] initPassword = {0, 0, 0, 0, 0, 0, 0, 0, 1, 5};
+        int[] initPassword = {1, 5, 0, 0, 0, 0, 0, 0, 0, 0};
         int[] fullPassword = password(initPassword);
-        String passwordText = (fullPassword != null) ? Arrays.toString(fullPassword) : "Password not found";
-        System.out.printf("Password: %s.%n", passwordText);
+        String passwordText = (fullPassword != null) ? vectorToString(fullPassword) : "Password not found";
+        System.out.printf("3. Password: %s.%n", passwordText);
 
         // Task 4
-        System.out.printf("Most common number is: %.2f.%n",
+        System.out.printf("4. Most common number is: %.2f.%n",
                 mostCommonNum(doubleNums));
 
         // Task 5
-        System.out.printf("Sum of max even and min odd: %.2f.%n",
+        System.out.printf("5. Sum of max even and min odd: %.2f.%n",
                 sumMaxEvenAndMinOdd(doubleNums));
     }
 
@@ -206,5 +205,21 @@ public class VectorUtil {
         }
 
         return minOdd;
+    }
+
+    private static String vectorToString(int[] vector) {
+        StringBuilder builder = new StringBuilder();
+        String separator = ", ";
+
+        for (int i = 0; i < vector.length; i++) {
+            if (i != 0) {
+                builder.append(separator)
+                        .append(i);
+            } else {
+                builder.append(i);
+            }
+        }
+
+        return builder.toString();
     }
 }
